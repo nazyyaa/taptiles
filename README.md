@@ -2,6 +2,8 @@
 
 **Taptiles** is a logic-based tile-matching puzzle game implemented in Java as a full-stack application. It supports both a web and console interface and includes backend infrastructure for user accounts, ratings, scores, and comments.
 
+🎬 Watch Gameplay on [YouTube](https://youtu.be/Z9ywDNWspI4)
+
 This project was created as part of a university assignment and demonstrates the integration of core game logic with a modern Spring Boot web backend.
 
 ---
