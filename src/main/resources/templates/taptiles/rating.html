@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TapTiles</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sessions.js"></script>
+    <script src="js/rating.js"></script>
+</head>
+
+<body>
+<div id="loading-screen" class="loading-screen">
+    <div class="loader"></div>
+</div>
+
+<div id="notification" class="notification">
+    <h2 class="text-center" id="notification-title"></h2>
+    <div class="site-header-text my-3" id="notification-message"></div>
+</div>
+
+<header class="site-header">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a class="site-header-text" href="/taptiles">
+            <i class="bi-box"></i><span>TapTiles</span>
+        </a>
+        <div class="d-flex justify-content-center flex-grow-1">
+            <a class="site-header-text mx-3" href="/taptiles/leaderboard">Leaderboard</a>
+            <a class="site-header-text mx-3" href="/taptiles/rating">Rating</a>
+            <a class="site-header-text mx-3" href="/taptiles/comment">Comment</a>
+        </div>
+        <a id="logout-link" class="site-header-text" onclick="logout()" style="display:none;">Logout</a>
+    </div>
+</header>
+
+<main id="video-container">
+    <a onclick="window.location.href = '/taptiles/play'" id="side-play-button">
+        <img src="images/next.png" alt="Play">
+    </a>
+    <div id="rating-content" class="view-active">
+        <div class="container d-flex justify-content-center align-items-center" style="min-height:100vh;">
+            <div class="rating p-4 rounded">
+                <h1 class="text-center mb-4">Game Rating</h1>
+                <h2> <span class="site-header-text mx-3">Average Rating:
+                            <span th:each="i : ${#numbers.sequence(1, 5)}">
+                        <span th:if="${i <= averageRating}" class="star">★</span>
+                        <span th:if="${i > averageRating}" class="bad_star">★</span>
+
+                </h2>
+                <div class="rating-list-container" style="max-height: 248px; overflow-y: auto;">
+                    <ul class="list-group">
+                        <th:block th:each="rating : ${ratings}">
+                            <li class="group-item d-flex justify-content-between align-items-center">
+                                <span class="site-header-text mx-3" th:text="${rating.player}">Player</span>
+                                <span class="site-header-text mx-3">
+                                    <span th:each="i : ${#numbers.sequence(1, 5)}">
+                                        <span th:if="${i <= rating.rating}" class="star">★</span>
+                                        <span th:if="${i > rating.rating}" class="bad_star">★</span>
+                                    </span>
+                                </span>
+                            </li>
+                        </th:block>
+                    </ul>
+                </div>
+                <div id="rating-form-container" class="view">
+                    <form action="/taptiles/rating" method="post" class="text-white p-4 rounded shadow w-100" style="max-width: 400px;">
+                        <h2 class="text-center">Leave your rating</h2>
+
+                        <div id="rating-stars" class="d-flex justify-content-between mb-3 px-3">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                        </div>
+
+                        <input type="hidden" id="rating-input" name="rating" value="0">
+
+                        <div class="d-flex justify-content-center">
+                            <a class="site-header-text" onclick="submit_rating()">Submit</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <video autoplay loop muted class="video-background">
+        <source src="videos/video.mp4" type="video/mp4">
+    </video>
+</main>
+
+</body>
+</html>

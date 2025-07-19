@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TapTiles</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sessions.js"></script>
+    <script src="js/play.js"></script>
+</head>
+
+<body>
+<div id="loading-screen" class="loading-screen">
+    <div class="loader"></div>
+</div>
+
+<div id="notification" class="notification">
+    <h2 class="text-center" id="notification-title"></h2>
+    <div class="site-header-text my-3" id="notification-message"></div>
+</div>
+
+<header class="site-header">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a class="site-header-text" href="/taptiles">
+            <i class="bi-box"></i><span>TapTiles</span>
+        </a>
+        <div class="d-flex justify-content-center flex-grow-1">
+            <a class="site-header-text mx-3" href="/taptiles/leaderboard">Leaderboard</a>
+            <a class="site-header-text mx-3" href="/taptiles/rating">Rating</a>
+            <a class="site-header-text mx-3" href="/taptiles/comment">Comment</a>
+        </div>
+        <a id="user-link" class="site-header-text" onclick="setMenu()">User</a>
+    </div>
+    <div id="points-menu" class="d-flex justify-content-center flex-grow-1" style="gap: 30px; font-weight: bolder; color: white;">
+        <div id="timer">Time: 00:00</div>
+        <div id="player-score">Score: 0</div>
+    </div>
+    <div id="user-menu" class="user-menu">
+        <b onclick="changeMainWindow(1)">Change Level</b>
+        <b onclick="changeMainWindow(2)">Change Nickname</b>
+        <b onclick="changeMainWindow(3)">Change Password</b>
+        <b onclick="logout()">Logout</b>
+    </div>
+</header>
+
+<main id="video-container">
+    <div id="play-box" class="play-box">
+        <div id="board-box" class="board-box">
+            <div th:utext="${boardHtml}"></div>
+        </div>
+        <div class="button-container">
+            <a class="site-header-text" onclick="reset()">Reset</a>
+            <a class="site-header-text" onclick="undo()">Undo</a>
+        </div>
+    </div>
+
+    <div id="container-settings-level" class="container-settings hidden">
+        <div class="d-flex flex-column align-items-center">
+            <h1>Select a level</h1>
+            <div class="d-flex flex-column align-items-center">
+                <b class="text-center" style="font-size: xx-large;" onclick="selectLevel(1)">Breeze</b>
+                <b class="text-center" style="font-size: xx-large;" onclick="selectLevel(2)">Storm</b>
+                <b class="text-center" style="font-size: xx-large;" onclick="selectLevel(3)">Thunder</b>
+                <b class="text-center" style="font-size: xx-large;" onclick="selectLevel(4)">Inferno</b>
+                <b class="text-center" style="font-size: xx-large;" onclick="selectLevel(5)">Apocalypse</b>
+            </div>
+        </div>
+    </div>
+
+    <div id="container-settings-nickname" class="container-settings hidden">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="form-container" style="max-width: 500px">
+                <h1 class="text-center mb-4">Change your nickname</h1>
+                <form>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" style="color: black;" id="new_username" placeholder="Username" required>
+                        <label for="new_username">Username</label>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a class="site-header-text" onclick="changePlayerInfo(1)">Submit</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="container-settings-password" class="container-settings hidden">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="form-container" style="max-width: 500px">
+                <h1 class="text-center mb-4">Change your password</h1>
+                <form>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" style="color: black;" id="new_password" placeholder="Password" required>
+                        <label for="new_password">Password</label>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a class="site-header-text" onclick="changePlayerInfo(2)">Submit</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <video autoplay loop muted class="video-background">
+        <source src="videos/video.mp4" type="video/mp4">
+    </video>
+</main>
+
+</body>
+</html>

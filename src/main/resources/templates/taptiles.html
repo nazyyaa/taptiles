@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TapTiles</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sessions.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+<div id="loading-screen" class="loading-screen">
+    <div class="loader"></div>
+</div>
+
+<div id="notification" class="notification">
+    <h2 class="text-center" id="notification-title"></h2>
+    <div class="site-header-text my-3" id="notification-message"></div>
+</div>
+
+<header class="site-header">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a class="site-header-text" href="/taptiles">
+            <i class="bi-box"></i><span>TapTiles</span>
+        </a>
+        <div class="d-flex justify-content-center flex-grow-1">
+            <a class="site-header-text mx-3" href="/taptiles/leaderboard">Leaderboard</a>
+            <a class="site-header-text mx-3" href="/taptiles/rating">Rating</a>
+            <a class="site-header-text mx-3" href="/taptiles/comment">Comment</a>
+        </div>
+        <a id="logout-link" class="site-header-text" onclick="logout()" style="display:none;">Logout</a>
+    </div>
+</header>
+
+<main id="video-container">
+    <div id="main-content" class="view active">
+        <h1>Welcome to TapTiles</h1>
+        <p class="lead">Nazar Andriichuk | KPI FEI TUKE 2025</p>
+        <p class="lead">Press the button to start your journey</p>
+        <div class="start-icon d-flex justify-content-center mt-3">
+            <a onclick="showLoginMotd()"><img src="images/next.png" class="img-fluid" alt=""></a>
+        </div>
+    </div>
+
+    <div id="form-register-content" class="view">
+        <div class="container d-flex justify-content-center align-items-center" style="min-height:100vh;">
+            <div class="form-container">
+                <h1 class="text-center mb-4">Create an account</h1>
+                <form>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="username_register" placeholder="Username" required>
+                        <label for="username_register">Username</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="password_register" placeholder="Password" required>
+                        <label for="password_register">Password</label>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <a class="site-header-text" onclick="register()">Submit</a>
+                        <a class="site-header-text" onclick="showLoginMotd()">Already have an account?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="form-login-content" class="view">
+        <div class="container d-flex justify-content-center align-items-center" style="min-height:100vh;">
+            <div class="form-container">
+                <h1 class="text-center mb-4">Log in to account</h1>
+                <form>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="username_login" placeholder="Username" required>
+                        <label for="username_login">Username</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="password_login" placeholder="Password" required>
+                        <label for="password_login">Password</label>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <a class="site-header-text" onclick="login()">Submit</a>
+                        <a class="site-header-text" onclick="showRegisterMotd()">Don't have an account yet?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-message" class="view">
+        <div class="container d-flex justify-content-center align-items-center" style="min-height:100vh;">
+            <div class="form-container text-center">
+                <h1 id="username-message">Good luck!</h1>
+                <p>Successfully! Redirecting...</p>
+            </div>
+        </div>
+    </div>
+
+    <video autoplay loop muted class="video-background">
+        <source src="videos/video.mp4" type="video/mp4">
+    </video>
+</main>
+
+</body>
+</html>

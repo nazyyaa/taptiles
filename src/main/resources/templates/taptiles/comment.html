@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TapTiles</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sessions.js"></script>
+    <script src="js/comment.js"></script>
+</head>
+
+<body>
+<div id="loading-screen" class="loading-screen">
+    <div class="loader"></div>
+</div>
+
+<div id="notification" class="notification">
+    <h2 class="text-center" id="notification-title"></h2>
+    <div class="site-header-text my-3" id="notification-message"></div>
+</div>
+
+<header class="site-header">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a class="site-header-text" href="/taptiles">
+            <i class="bi-box"></i><span>TapTiles</span>
+        </a>
+        <div class="d-flex justify-content-center flex-grow-1">
+            <a class="site-header-text mx-3" href="/taptiles/leaderboard">Leaderboard</a>
+            <a class="site-header-text mx-3" href="/taptiles/rating">Rating</a>
+            <a class="site-header-text mx-3" href="/taptiles/comment">Comment</a>
+        </div>
+        <a id="logout-link" class="site-header-text" onclick="logout()" style="display:none;">Logout</a>
+    </div>
+</header>
+
+<main id="video-container">
+    <a onclick="window.location.href = '/taptiles/play'" id="side-play-button">
+        <img src="images/next.png" alt="Play">
+    </a>
+    <div id="comment-content" class="view-active">
+        <div class="container d-flex justify-content-center align-items-center" style="min-height:100vh;">
+            <div class="comment p-4 rounded">
+                <h1 class="text-center mb-4">Player Comments</h1>
+
+                <div class="comment-list-container mb-4" style="max-height: 400px; overflow-y: auto;">
+                    <ul class="list-group">
+                        <th:block th:each="comment : ${comments}">
+                            <div class="comment-container">
+                                <h2><strong th:text="${comment.player}" class="site-header-text">Player Name</strong></h2>
+                                <span th:text="${comment.comment}" class="site-header-text mx-md-3 mb-4">This is a comment</span>
+                            </div>
+                        </th:block>
+                    </ul>
+                </div>
+                <div id="comment-form-container" class="view">
+                    <form action="/taptiles/comment" method="post" class="text-white p-4 rounded shadow w-100" style="max-width: 400px;">
+                        <h2 class="text-center mb-4">Leave your review</h2>
+
+                        <input type="text" class="form-control mb-3" id="comment" name="comment" placeholder="Comment" required>
+
+                        <div class="d-flex justify-content-center">
+                            <a class="site-header-text my-3" onclick="submit_comment()">Submit</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <video autoplay loop muted class="video-background">
+            <source src="videos/video.mp4" type="video/mp4">
+        </video>
+</main>
+
+</body>
+</html>
